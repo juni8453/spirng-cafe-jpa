@@ -18,6 +18,11 @@
 ``` text
 main
  | - deploy (배포)
+ | - develop-FE (개발)
+ |     |
+ |     | - feature (issue 에 맞춰 생성)
+ |     | - fix
+ |
  | - develop-BE (개발)
        |
        | - feature (issue 에 맞춰 생성)
@@ -42,25 +47,10 @@ CollectionView 구현
 
 
 2. `commit Template`
+- 제목에 이슈 번호 표기
 ```text
-#### 제목 ####
-#### 기능 개발
-#feat :
-#### 버그수정
-#fix : 
-#### 문서 작업
-#docs :
-#### 테스트 코드 작성 
-#test : 
-#### 리팩토링
-#refact : 
-#### 간단한 수정(소스/테스트 파일 변동 X)
-#chore : 
-#### 공백 ####
+:sparkles: feat : 제목내용 (#1)
 
-#### 본문 ####
-
-
+- 내용 1
+- 내용 2
 ```
-
-
