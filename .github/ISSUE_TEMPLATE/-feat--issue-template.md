@@ -7,11 +7,11 @@ assignees: juni8453, honeySleepr
 
 ---
 
-제목: [FEAT] (iOS) 기능제목
+제목: [FEAT] (BE) 기능제목
 ---
 
 ## 💡 issue
-CollectionView 구현
+기본적인 MVC 의존 관계 형성
 
 ## 📝 todo
 [ ] 작업1
