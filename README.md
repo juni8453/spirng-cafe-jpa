@@ -13,6 +13,7 @@
 3. `docs` - 문서 수정
 4. `test` - 테스트 코드 추가
 5. `refact` - 코드 리팩터링
+6. `chore` - 간단한 수정 (src, test 파일 변동 X)
 
 ``` text
 main
@@ -42,9 +43,24 @@ CollectionView 구현
 
 2. `commit Template`
 ```text
-feat: 컬렉션뷰 ViewController 에 적용 (#1)
-///공백///
-Todo list 를 보여줄 컬렉션뷰를 ViewController 에 적용했다.
+#### 제목 ####
+#### 기능 개발
+#feat :
+#### 버그수정
+#fix : 
+#### 문서 작업
+#docs :
+#### 테스트 코드 작성 
+#test : 
+#### 리팩토링
+#refact : 
+#### 간단한 수정(소스/테스트 파일 변동 X)
+#chore : 
+#### 공백 ####
+
+#### 본문 ####
+
+
 ```
 
 
