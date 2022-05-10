@@ -4,3 +4,17 @@ spring:
     url: jdbc:mysql://${SERVER_IP}:3306/jpaCafe?serverTimezone=UTC&characterEncoding=UTF-8
     username: ${USER_ID}
     password: ${USER_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  logging:
+    level:
+      org.hibernate.SQL: debug
+      org.hibernate.type: trace
