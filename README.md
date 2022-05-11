@@ -60,3 +60,18 @@ CollectionView 구현
 ### ERD
 
 ![image](https://user-images.githubusercontent.com/92678400/167776725-8c85b43f-df0c-494c-8bf4-c0fd1bfc6e31.png)
+
+---
+### API 명세
+
+| Method |        URI       | Description                 |
+|:------:|:----------------:|-----------------------------|
+| GET    | /artciles/{page} | 지정된 페이지의 게시글 조회 |
+| POST   | /articles        | 게시글 추가                 |
+| PATCH  | /articles/{id}   | 지정된 게시글 수정          |
+| DELETE | /articles/{id}   | 지정된 게시글 삭제          |
+|   ---  |        ---       |             ----            |
+| POST   | /members         | 가입                        |
+| GET    |                  | ???                         |
+
+* 검색 기능?
