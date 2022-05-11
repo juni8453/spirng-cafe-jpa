@@ -1,16 +1,11 @@
 package jpaproject.cafe.domain;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -23,12 +18,21 @@ public class Article {
 
 	@Column(nullable = false)
 	private String title;
+
 	@Column(nullable = false)
 	private String content;
+
 	@Column(nullable = false)
 	private LocalDateTime createdDateTime;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
+
+	public Article(String title, String content, LocalDateTime createdDateTime, Member member) {
+		this.title = title;
+		this.content = content;
+		this.createdDateTime = createdDateTime;
+		this.member = member;
+	}
 }
