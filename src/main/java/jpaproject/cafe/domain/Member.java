@@ -1,14 +1,10 @@
 package jpaproject.cafe.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -25,9 +21,8 @@ public class Member {
 	@Column(nullable = false)
 	private MemberType memberType;
 
+	public Member(String memberName, MemberType memberType) {
+		this.memberName = memberName;
+		this.memberType = memberType;
+	}
 }
-
-// id
-// username
-// type (admin, user)
-// User(1) - Article(N)
