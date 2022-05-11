@@ -18,9 +18,11 @@ public class Member {
 	@Id @GeneratedValue
 	@Column(name = "MEMBER_ID")
 	private Long id;
+	@Column(nullable = false)
+	private String memberName;
 
-	private String userName;
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private MemberType memberType;
 
 }

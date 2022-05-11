@@ -54,3 +54,9 @@ CollectionView 구현
 - 내용 1
 - 내용 2
 ```
+
+--- 
+
+### ERD
+
+![image](https://user-images.githubusercontent.com/92678400/167776725-8c85b43f-df0c-494c-8bf4-c0fd1bfc6e31.png)
