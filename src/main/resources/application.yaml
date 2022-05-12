@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${SERVER_IP}:3306/jpaCafe?serverTimezone=UTC&characterEncoding=UTF-8
-    username: ${USER_ID}
-    password: ${USER_PASSWORD}
+    url: jdbc:mysql://13.125.161.219:3306/jpaCafe?serverTimezone=UTC&characterEncoding=UTF-8
+    username: super
+    password: Wjsqudwns1!
 
   jpa:
     hibernate:

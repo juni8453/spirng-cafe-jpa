@@ -1,5 +1,10 @@
-package jpaproject.cafe.repository;
+package jpaproject.cafe.article;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import jpaproject.cafe.article.Article;
 import jpaproject.cafe.article.ArticleRepository;
 import jpaproject.cafe.member.Member;
@@ -8,18 +13,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+//@Rollback(value = false)
 class ArticleRepositoryTest {
 
     @Autowired
@@ -34,7 +32,7 @@ class ArticleRepositoryTest {
 
         //given
         Member member = new Member("name", MemberType.USER);
-        Article article = new Article("title", "content", LocalDateTime.now(), member);
+        Article article = new Article("title", "content", member);
 
         // when
         em.persist(member);
@@ -43,6 +41,21 @@ class ArticleRepositoryTest {
 
         // then
         assertThat(findArticle.getId()).isEqualTo(save.getId());
+    }
+
+    @Test
+    @DisplayName("전체 게시글을 조회한다")
+    public void findAll() {
+        // given
+        for (int i = 0; i < 10; i++) {
+            articleRepository.save(new Article("title"+i, "내용"+i, null ));
+        }
+
+        // when
+        List<Article> articles = articleRepository.findAll();
+
+        // then
+        assertThat(articles.size()).isEqualTo(10);
     }
 
 }
