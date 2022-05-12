@@ -1,6 +1,5 @@
-package jpaproject.cafe.controller;
+package jpaproject.cafe.member;
 
-import jpaproject.cafe.service.MemberService;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

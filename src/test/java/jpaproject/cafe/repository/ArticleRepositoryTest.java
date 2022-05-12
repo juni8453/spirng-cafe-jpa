@@ -1,8 +1,9 @@
 package jpaproject.cafe.repository;
 
-import jpaproject.cafe.domain.Article;
-import jpaproject.cafe.domain.Member;
-import jpaproject.cafe.domain.MemberType;
+import jpaproject.cafe.article.Article;
+import jpaproject.cafe.article.ArticleRepository;
+import jpaproject.cafe.member.Member;
+import jpaproject.cafe.member.MemberType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

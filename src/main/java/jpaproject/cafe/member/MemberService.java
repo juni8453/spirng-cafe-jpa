@@ -1,6 +1,5 @@
-package jpaproject.cafe.service;
+package jpaproject.cafe.member;
 
-import jpaproject.cafe.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 @Service
