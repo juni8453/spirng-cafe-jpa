@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -50,8 +51,10 @@ public class Article {
 	public Article(String title, String content, Member member) {
 		this.title = title;
 		this.content = content;
-		this.createdDateTime = createdDateTime;
-		this.lastModifiedDateTime = lastModifiedDateTime;
 		this.member = member;
+	}
+
+	public static Article dtoToEntity(ArticleCreateDto dto) {
+		return new Article(dto.getTitle(),dto.getContent(), null);
 	}
 }
