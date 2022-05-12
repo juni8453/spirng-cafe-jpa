@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
+import jpaproject.cafe.article.dto.ArticleUpdateDto;
 import jpaproject.cafe.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -56,5 +57,10 @@ public class Article {
 
 	public static Article dtoToEntity(ArticleCreateDto dto) {
 		return new Article(dto.getTitle(),dto.getContent(), null);
+	}
+
+	public void updateArticle(ArticleUpdateDto articleUpdateDto) {
+		this.title = articleUpdateDto.getTitle();
+		this.content = articleUpdateDto.getContent();
 	}
 }
