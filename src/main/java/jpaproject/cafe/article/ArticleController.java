@@ -3,12 +3,10 @@ package jpaproject.cafe.article;
 import java.util.List;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
+import jpaproject.cafe.article.dto.ArticleUpdateDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/articles")
 @RestController
@@ -32,9 +30,16 @@ public class ArticleController {
     public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto) {
         articleService.save(articleCreateDto);
 
-        return null;
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<ArticleUpdateDto> update(
+            @PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
 
+        articleService.update(id, articleUpdateDto);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
