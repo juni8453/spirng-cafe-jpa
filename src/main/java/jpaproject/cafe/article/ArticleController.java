@@ -21,8 +21,8 @@ public class ArticleController {
 
     @GetMapping
     public ResponseEntity<List<ArticleReadDto>> read() {
-        List<ArticleReadDto> findArticles= articleService.findAll();
-        
+        List<ArticleReadDto> findArticles = articleService.findAll();
+
         return ResponseEntity.ok(findArticles);
     }
 
@@ -35,11 +35,17 @@ public class ArticleController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ArticleUpdateDto> update(
-            @PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
+        @PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
 
         articleService.update(id, articleUpdateDto);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        articleService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

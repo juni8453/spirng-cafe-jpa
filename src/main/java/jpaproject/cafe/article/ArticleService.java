@@ -26,9 +26,9 @@ public class ArticleService {
 			.collect(Collectors.toList());
 	}
 
-	public void save(ArticleCreateDto articleCreateDto) {
+	public Long save(ArticleCreateDto articleCreateDto) {
 		Article article = Article.dtoToEntity(articleCreateDto);
-		articleRepository.save(article);
+		return articleRepository.save(article).getId();
 	}
 
 	public void update(Long id, ArticleUpdateDto articleUpdateDto) {
@@ -37,5 +37,13 @@ public class ArticleService {
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
 		findArticle.updateArticle(articleUpdateDto);
+	}
+
+	public void delete(Long id) {
+		try {
+			articleRepository.deleteById(id);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("존재하지 않는 게시글입니다.");
+		}
 	}
 }
