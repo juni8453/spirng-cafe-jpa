@@ -1,4 +1,4 @@
-package jpaproject.cafe.repository;
+package jpaproject.cafe.article;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
