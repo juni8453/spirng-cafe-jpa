@@ -46,6 +46,6 @@ class ArticleServiceTest {
         ArticleUpdateDto updateDto = new ArticleUpdateDto("수정 title", "수정 content");
 
         // when, then
-        assertThrows(IllegalStateException.class, ()-> articleService.update(2L, updateDto));
+        assertThrows(IllegalArgumentException.class, ()-> articleService.update(2L, updateDto));
     }
 }
