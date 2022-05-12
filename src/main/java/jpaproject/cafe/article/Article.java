@@ -1,5 +1,6 @@
-package jpaproject.cafe.domain;
+package jpaproject.cafe.article;
 
+import jpaproject.cafe.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

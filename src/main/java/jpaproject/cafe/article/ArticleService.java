@@ -1,6 +1,5 @@
-package jpaproject.cafe.service;
+package jpaproject.cafe.article;
 
-import jpaproject.cafe.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
 @Service

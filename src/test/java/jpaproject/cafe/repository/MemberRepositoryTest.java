@@ -1,15 +1,16 @@
 package jpaproject.cafe.repository;
 
-import jpaproject.cafe.domain.Member;
-import jpaproject.cafe.domain.MemberType;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import jpaproject.cafe.member.MemberRepository;
+import jpaproject.cafe.member.MemberType;
+import jpaproject.cafe.member.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional

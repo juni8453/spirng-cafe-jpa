@@ -1,4 +1,4 @@
-package jpaproject.cafe.domain;
+package jpaproject.cafe.member;
 
 import lombok.AccessLevel;
 import lombok.Getter;

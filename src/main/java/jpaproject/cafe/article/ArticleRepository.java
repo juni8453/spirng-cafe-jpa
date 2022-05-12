@@ -1,6 +1,5 @@
-package jpaproject.cafe.repository;
+package jpaproject.cafe.article;
 
-import jpaproject.cafe.domain.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {

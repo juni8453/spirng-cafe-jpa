@@ -1,6 +1,5 @@
-package jpaproject.cafe.controller;
+package jpaproject.cafe.article;
 
-import jpaproject.cafe.service.ArticleService;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
