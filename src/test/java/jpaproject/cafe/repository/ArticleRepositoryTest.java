@@ -34,7 +34,7 @@ class ArticleRepositoryTest {
 
         //given
         Member member = new Member("name", MemberType.USER);
-        Article article = new Article("title", "content", LocalDateTime.now(), member);
+        Article article = new Article("title", "content", LocalDateTime.now(), LocalDateTime.now(), member);
 
         // when
         em.persist(member);
