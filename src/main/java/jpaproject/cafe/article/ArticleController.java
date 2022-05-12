@@ -28,14 +28,13 @@ public class ArticleController {
         return ResponseEntity.ok(findArticles);
     }
 
-    // TODO CRUD 구현
-    //  1. Creat /articles
     @PostMapping
     public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto) {
         articleService.save(articleCreateDto);
 
         return null;
     }
+
 
 
 }
