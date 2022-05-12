@@ -55,8 +55,17 @@ public class Article {
 		this.member = member;
 	}
 
+	public Article(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
+
+	public static Article dtoToEntity(ArticleCreateDto dto, Member dummyMember) {
+		return new Article(dto.getTitle(), dto.getContent(), dummyMember);
+	}
+
 	public static Article dtoToEntity(ArticleCreateDto dto) {
-		return new Article(dto.getTitle(),dto.getContent(), null);
+		return new Article(dto.getTitle(), dto.getContent());
 	}
 
 	public void updateArticle(ArticleUpdateDto articleUpdateDto) {

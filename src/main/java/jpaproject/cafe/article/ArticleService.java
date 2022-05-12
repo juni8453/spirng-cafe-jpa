@@ -1,10 +1,11 @@
 package jpaproject.cafe.article;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
 import jpaproject.cafe.article.dto.ArticleUpdateDto;
+import jpaproject.cafe.member.Member;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,12 +19,18 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	public List<ArticleReadDto> findAll() {
-		List<Article> findArticles = articleRepository.findAll();
+	public Page<ArticleReadDto> findAll(Pageable pageable) {
 
-		return findArticles.stream()
-			.map(ArticleReadDto::new)
-			.collect(Collectors.toList());
+		Page<Article> articlePage = articleRepository.findAll(pageable);
+		Page<ArticleReadDto> pages = articlePage.map(article -> new ArticleReadDto(article));
+
+		return pages;
+	}
+
+
+	public Long save(ArticleCreateDto articleCreateDto, Member member) {
+    Article article = Article.dtoToEntity(articleCreateDto, member);
+		return articleRepository.save(article).getId();
 	}
 
 	public Long save(ArticleCreateDto articleCreateDto) {
