@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
+import jpaproject.cafe.article.dto.ArticleUpdateDto;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ArticleService {
 
 	private final ArticleRepository articleRepository;
@@ -26,5 +29,13 @@ public class ArticleService {
 	public void save(ArticleCreateDto articleCreateDto) {
 		Article article = Article.dtoToEntity(articleCreateDto);
 		articleRepository.save(article);
+	}
+
+	public void update(Long id, ArticleUpdateDto articleUpdateDto) {
+		// 예외 처리 필요
+		Article findArticle = articleRepository.findById(id)
+				.orElseThrow(IllegalStateException::new);
+
+		findArticle.updateArticle(articleUpdateDto);
 	}
 }
