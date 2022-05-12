@@ -34,7 +34,7 @@ public class ArticleService {
 	public void update(Long id, ArticleUpdateDto articleUpdateDto) {
 		// 예외 처리 필요
 		Article findArticle = articleRepository.findById(id)
-				.orElseThrow(IllegalStateException::new);
+				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
 		findArticle.updateArticle(articleUpdateDto);
 	}
