@@ -1,11 +1,10 @@
 package jpaproject.cafe.article;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleUpdateDto;
 import org.junit.jupiter.api.DisplayName;
@@ -73,10 +72,11 @@ class ArticleServiceTest {
 		// given
 		ArticleCreateDto createDto = new ArticleCreateDto("title", "content");
 		Long id = articleService.save(createDto);
-        // when
-        articleService.delete(id);
+		// when
+		articleService.delete(id);
 
-        // then
-        assertThrows(NoSuchElementException.class, () -> articleRepository.findById(id).get());
+		// then
+		assertThatThrownBy(() -> articleRepository.findById(id).get())
+			.isInstanceOf(NoSuchElementException.class);
 	}
 }
