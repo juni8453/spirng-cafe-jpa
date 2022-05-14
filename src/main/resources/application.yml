@@ -29,5 +29,6 @@ oauth:
     client_secrets: 9cb33ffab3d47bbf626ce2b8797fc880213ddf9b
     login_url: https://github.com/login/oauth/authorize?
     redirect_url: http://localhost:8080/login/oauth
+    request_token_url: https://github.com/login/oauth/access_token
 
 # 중요 정보들은 환경변수로 빼기 : client_secrets,
