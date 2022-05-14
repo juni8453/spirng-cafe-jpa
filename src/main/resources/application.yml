@@ -18,3 +18,16 @@ spring:
     level:
       org.hibernate.SQL: debug
       org.hibernate.type: trace
+
+#logging:
+#  level:
+#    root: debug
+
+oauth:
+  github:
+    client_id: 0684814fcec8b783587f
+    client_secrets: 9cb33ffab3d47bbf626ce2b8797fc880213ddf9b
+    login_url: https://github.com/login/oauth/authorize?
+    redirect_url: http://localhost:8080/login/oauth
+
+# 중요 정보들은 환경변수로 빼기 : client_secrets,

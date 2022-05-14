@@ -12,4 +12,6 @@ public class MemberService {
     }
 
 
+    public void requestAccessToken(String code, String state) {
+    }
 }
