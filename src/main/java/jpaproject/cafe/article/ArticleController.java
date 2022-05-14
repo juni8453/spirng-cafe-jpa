@@ -1,12 +1,9 @@
 package jpaproject.cafe.article;
 
-import javax.annotation.PostConstruct;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
 import jpaproject.cafe.article.dto.ArticleUpdateDto;
-import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
-import jpaproject.cafe.member.MemberType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -63,13 +60,13 @@ public class ArticleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostConstruct
-    public void init() {
-        Member member = new Member("Tany", MemberType.USER);
-        Member saveMember = memberRepository.save(member);
-
-        for (int i = 0; i < 30; i++) {
-            articleService.save(new ArticleCreateDto("title" + i, "content" + i), member);
-        }
-    }
+    //    @PostConstruct
+    //    public void init() {
+    //        Member member = new Member("Tany", MemberType.USER);
+    //        Member saveMember = memberRepository.save(member);
+    //
+    //        for (int i = 0; i < 30; i++) {
+    //            articleService.save(new ArticleCreateDto("title" + i, "content" + i), member);
+    //        }
+    //    }
 }

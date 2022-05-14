@@ -3,6 +3,7 @@ package jpaproject.cafe.member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jpaproject.cafe.member.dto.TokenDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,55 +16,62 @@ import org.springframework.web.client.RestTemplate;
 @Transactional
 public class MemberService {
 
-    private final MemberRepository memberRepository;
-    private final String tokenUrl;
-    private final String clientId;
-    private final String clientSecrets;
-    private final String redirectUrl;
-    private final RestTemplate restTemplate;
+	private final MemberRepository memberRepository;
+	private final String tokenUrl;
+	private final String clientId;
+	private final String clientSecrets;
+	private final String redirectUrl;
+	private final RestTemplate restTemplate;
 
 
-    public MemberService(MemberRepository memberRepository,
-        @Value("${oauth.github.request_token_url}") String tokenUrl,
-        @Value("${oauth.github.client_id}") String clientId,
-        @Value("${oauth.github.client_secrets}") String clientSecrets,
-        @Value("${oauth.github.redirect_url}") String redirectUrl,
-        RestTemplate restTemplate) {
-        this.memberRepository = memberRepository;
-        this.tokenUrl = tokenUrl;
-        this.clientId = clientId;
-        this.clientSecrets = clientSecrets;
-        this.redirectUrl = redirectUrl;
-        this.restTemplate = restTemplate;
-    }
+	public MemberService(MemberRepository memberRepository,
+		@Value("${oauth.github.request_token_url}") String tokenUrl,
+		@Value("${oauth.github.client_id}") String clientId,
+		@Value("${oauth.github.client_secrets}") String clientSecrets,
+		@Value("${oauth.github.redirect_url}") String redirectUrl,
+		RestTemplate restTemplate) {
+		this.memberRepository = memberRepository;
+		this.tokenUrl = tokenUrl;
+		this.clientId = clientId;
+		this.clientSecrets = clientSecrets;
+		this.redirectUrl = redirectUrl;
+		this.restTemplate = restTemplate;
+	}
 
 
-    public void login(String code, String state, String savedState) {
-        validateState(state, savedState);
+	public void login(String code, String state, String savedState) {
+		validateState(state, savedState);
+		obtainAccessToken(code);
+		//        Map<String, String> tokenMap = obtainAccessToken(code);
+		//        obtainMemberInfo(tokenMap);
 
-        Map<String, String> tokenMap = obtainAccessToken(code);
+	}
 
-    }
+	private void obtainMemberInfo(Map<String, String> tokenMap) {
 
-    private Map<String, String> obtainAccessToken(String code) {
+	}
 
-        Map<String, String> requestBody = new HashMap<>();
+	private Map<String, String> obtainAccessToken(String code) {
 
-        requestBody.put("client_id", clientId);
-        requestBody.put("client_secret", clientSecrets);
-        requestBody.put("code", code);
+		Map<String, String> requestBody = new HashMap<>();
 
-        HttpHeaders requestHeader = new HttpHeaders();
-        requestHeader.setAccept(List.of(MediaType.APPLICATION_JSON));
+		requestBody.put("client_id", clientId);
+		requestBody.put("client_secret", clientSecrets);
+		requestBody.put("code", code);
 
-        HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody, requestHeader);
+		HttpHeaders requestHeader = new HttpHeaders();
+		requestHeader.setAccept(List.of(MediaType.APPLICATION_JSON));
 
-        Map<String, String> tokenMap = restTemplate.postForObject(tokenUrl, request, HashMap.class);
-        System.out.println("============map.entrySet() = " + tokenMap.entrySet());
-        // map.entrySet() = [access_token=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, scope=, token_type=bearer]
+		HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody, requestHeader);
 
-        return tokenMap;
-    }
+		TokenDto tokenDto = restTemplate.postForObject(tokenUrl, request, TokenDto.class);
+
+		System.out.println("============ tokenDto = " + tokenDto);
+		// [access_token=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, scope=, token_type=bearer]
+
+		return null;
+		//        return tokenMap;
+	}
 
     private void validateState(String state, String savedState) {
         System.out.println("state = " + state);
