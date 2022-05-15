@@ -1,9 +1,12 @@
 package jpaproject.cafe.article;
 
+import javax.annotation.PostConstruct;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
 import jpaproject.cafe.article.dto.ArticleUpdateDto;
+import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
+import jpaproject.cafe.member.MemberType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -39,7 +42,8 @@ public class ArticleController {
 
     @PostMapping
     public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto) {
-        articleService.save(articleCreateDto);
+        Member dummyMember = memberRepository.findAll().get(0);
+        articleService.save(articleCreateDto, dummyMember);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -60,6 +64,11 @@ public class ArticleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostConstruct
+    public void createDummyMember() {
+        Member member = new Member("Dummy", MemberType.USER);
+        memberRepository.save(member);
+    }
     //    @PostConstruct
     //    public void init() {
     //        Member member = new Member("Tany", MemberType.USER);
