@@ -36,6 +36,7 @@ public class MemberController {
 		attributes.addAttribute("redirect_url", redirectUrl);
 		attributes.addAttribute("state", "bcbc2"); // Todo: 랜덤값 만들어 넣기
 		session.setAttribute("state", "bcbc2");
+		session.setAttribute("set-Cookie", "bcbc2");
 		return new RedirectView(loginUrl);
 	}
 
@@ -45,6 +46,8 @@ public class MemberController {
 		String savedState = String.valueOf(session.getAttribute("state"));
 		// state을 세션에 저장하고(savedSession), 그걸 RequestParam으로 들어오는 state와 비교..이게 맞나?
 		memberService.login(code, state, savedState);
+
+		//	Todo:	return ??
 	}
 
 
