@@ -10,18 +10,15 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        show_sql: true
         format_sql: true
         default_batch_fetch_size: 100
 
-  logging:
-    level:
-      org.hibernate.SQL: debug
-      org.hibernate.type: trace
+logging:
+  level:
+    org.hibernate.SQL: debug
+    jpaproject:
+      cafe: debug
 
-#logging:
-#  level:
-#    root: debug
 
 oauth:
   github:
@@ -30,5 +27,6 @@ oauth:
     login_url: https://github.com/login/oauth/authorize?
     redirect_url: http://localhost:8080/login/oauth
     request_token_url: https://github.com/login/oauth/access_token
+    request_user_info_url: https://api.github.com/user
 
 # 중요 정보들은 환경변수로 빼기 : client_secrets,
