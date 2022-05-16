@@ -34,8 +34,8 @@ public class LoginController {
 
         Token accessTokenInfo = loginService.getAccessToken(code, state);
         OauthMemberInfo memberInfo = loginService.getOauthMemberInfo(accessTokenInfo);
-
-        return ResponseEntity.ok().body(memberInfo);
+        loginService.saveMember(memberInfo);
+        return ResponseEntity.ok(memberInfo);
     }
 
 
