@@ -1,13 +1,23 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://13.125.161.219:3306/jpaCafe?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://3.39.119.201:3306/jpaCafe?serverTimezone=UTC&characterEncoding=UTF-8
     username: super
     password: Wjsqudwns1!
 
+oauth2:
+  user:
+    github:
+      client-id: 3c693e7c5e6c99f66d25
+      client-secret: 2fc91fb7febd5ab2485ccd5736cd2e7ff550d0d9
+      redirect-uri: http://localhost:8080/login/oauth
+      login-uri: https://github.com/login/oauth/authorize
+      token-uri: https://github.com/login/oauth/access_token
+      user-uri: https://api.github.com/user
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         show_sql: true
