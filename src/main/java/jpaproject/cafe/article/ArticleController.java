@@ -63,13 +63,13 @@ public class ArticleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostConstruct
-    public void init() {
-        Member member = new Member("Tany", MemberType.USER);
-        Member saveMember = memberRepository.save(member);
-
-        for (int i = 0; i < 30; i++) {
-            articleService.save(new ArticleCreateDto("title" + i, "content" + i), member);
-        }
-    }
+//    @PostConstruct
+//    public void init() {
+//        Member member = new Member("Tany", MemberType.USER);
+//        Member saveMember = memberRepository.save(member);
+//
+//        for (int i = 0; i < 30; i++) {
+//            articleService.save(new ArticleCreateDto("title" + i, "content" + i), member);
+//        }
+//    }
 }
