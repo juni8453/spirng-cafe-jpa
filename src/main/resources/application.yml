@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    default: ${profile}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    jpaproject:
+      cafe: debug
+
+oauth2:
+  user:
+    github:
+      client-id: 3c693e7c5e6c99f66d25
+      client-secret: 2fc91fb7febd5ab2485ccd5736cd2e7ff550d0d9
+      redirect-uri: http://localhost:8080/login/oauth
+      login-uri: https://github.com/login/oauth/authorize
+      token-uri: https://github.com/login/oauth/access_token
+      user-uri: https://api.github.com/user
