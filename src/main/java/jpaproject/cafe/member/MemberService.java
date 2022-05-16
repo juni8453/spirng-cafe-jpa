@@ -46,11 +46,12 @@ public class MemberService {
 	}
 
 
-	public void login(String code, String state, String savedState) {
+	public MemberInfoDto login(String code, String state, String savedState) {
 		validateState(state, savedState);
 		TokenDto tokenDto = obtainAccessToken(code);
 		MemberInfoDto memberInfoDto = obtainMemberInfo(tokenDto);
 		saveMember(memberInfoDto);
+		return memberInfoDto;
 	}
 
 	private void saveMember(MemberInfoDto memberInfoDto) {
@@ -60,6 +61,8 @@ public class MemberService {
 		memberRepository.findByMemberName(member.getMemberName())
 			.ifPresentOrElse(findMember -> findMember.setLogin(true),
 				() -> memberRepository.save(member));
+
+		// Todo: setLogin 대신 GitHubToken을 필드로 두고 덮어쓸까?
 	}
 
 	private MemberInfoDto obtainMemberInfo(TokenDto tokenDto) {

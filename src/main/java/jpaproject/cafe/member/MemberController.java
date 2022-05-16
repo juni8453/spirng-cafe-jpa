@@ -1,8 +1,10 @@
 package jpaproject.cafe.member;
 
 import javax.servlet.http.HttpSession;
+import jpaproject.cafe.member.dto.MemberInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,13 +43,11 @@ public class MemberController {
 	}
 
 	@GetMapping("/login/oauth")
-	public void requestAccessToken(@RequestParam("code") String code,
+	public ResponseEntity<MemberInfoDto> requestAccessToken(@RequestParam("code") String code,
 		@RequestParam("state") String state, HttpSession session) {
 		String savedState = String.valueOf(session.getAttribute("state"));
-		// state을 세션에 저장하고(savedSession), 그걸 RequestParam으로 들어오는 state와 비교..이게 맞나?
-		memberService.login(code, state, savedState);
-
-		//	Todo:	return ??
+		MemberInfoDto memberInfoDto = memberService.login(code, state, savedState);
+		return ResponseEntity.ok(memberInfoDto);
 	}
 
 

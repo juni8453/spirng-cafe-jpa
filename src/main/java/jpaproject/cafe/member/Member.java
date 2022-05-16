@@ -30,7 +30,7 @@ public class Member {
 	private boolean login;
 
 	public Member(MemberInfoDto memberInfoDto, boolean normalUser) {
-		this.memberName = memberInfoDto.getName();
+		this.memberName = memberInfoDto.getLogin();
 		this.memberType = normalUser ? MemberType.USER : MemberType.ADMIN;
 	}
 
