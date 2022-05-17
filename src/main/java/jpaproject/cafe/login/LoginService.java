@@ -1,21 +1,29 @@
-package jpaproject.cafe.login.dto;
-
-import jpaproject.cafe.member.dto.OauthMemberInfo;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
+package jpaproject.cafe.login;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import jpaproject.cafe.login.dto.Token;
+import jpaproject.cafe.member.Member;
+import jpaproject.cafe.member.MemberRepository;
+import jpaproject.cafe.member.MemberType;
+import jpaproject.cafe.member.dto.OauthMemberInfo;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Service
 public class LoginService {
 
+    private final MemberRepository memberRepository;
     private final String clientId;
     private final String loginUri;
     private final String redirectUri;
@@ -26,14 +34,15 @@ public class LoginService {
     private final RestTemplate restTemplate;
 
     public LoginService(
-            @Value("${oauth2.user.github.client-id}") String clientId,
-            @Value("${oauth2.user.github.login-uri}") String loginUri,
-            @Value("${oauth2.user.github.redirect-uri}") String redirectUri,
-            @Value("${oauth2.user.github.user-uri}") String userUri,
-            @Value("${oauth2.user.github.token-uri}") String tokenUri,
-            @Value("${oauth2.user.github.client-secret}") String secret,
-            RestTemplate restTemplate) {
-
+        MemberRepository memberRepository,
+        @Value("${oauth2.user.github.client-id}") String clientId,
+        @Value("${oauth2.user.github.login-uri}") String loginUri,
+        @Value("${oauth2.user.github.redirect-uri}") String redirectUri,
+        @Value("${oauth2.user.github.user-uri}") String userUri,
+        @Value("${oauth2.user.github.token-uri}") String tokenUri,
+        @Value("${oauth2.user.github.client-secret}") String secret,
+        RestTemplate restTemplate) {
+        this.memberRepository = memberRepository;
         this.clientId = clientId;
         this.loginUri = loginUri;
         this.redirectUri = redirectUri;
@@ -80,7 +89,18 @@ public class LoginService {
 
         // getForEntity() -> Header 를 넣을 수 없기 떄문에 exchange() 사용
         return restTemplate
-                .exchange(userUri, HttpMethod.GET, request, OauthMemberInfo.class)
-                .getBody();
+            .exchange(userUri, HttpMethod.GET, request, OauthMemberInfo.class)
+            .getBody();
+    }
+
+
+    public void saveMember(OauthMemberInfo memberInfo) {
+        Member member = new Member(memberInfo, MemberType.USER);
+
+        // 이미 존재할 경우 login 속성을 true로 업데이트, 존재하지 않으면 새로 저장
+        memberRepository.findByMemberName(member.getMemberName())
+            .ifPresentOrElse(findMember -> findMember.setLogin(true),
+                () -> memberRepository.save(member));
+
     }
 }

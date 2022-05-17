@@ -30,6 +30,7 @@ public class ArticleService {
 
 	public Long save(ArticleCreateDto articleCreateDto, Member member) {
     Article article = Article.dtoToEntity(articleCreateDto, member);
+
 		return articleRepository.save(article).getId();
 	}
 

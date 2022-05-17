@@ -42,8 +42,8 @@ public class ArticleController {
 
     @PostMapping
     public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto) {
-        articleService.save(articleCreateDto);
-
+        Member dummyMember = memberRepository.findAll().get(0);
+        articleService.save(articleCreateDto, dummyMember);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -63,13 +63,9 @@ public class ArticleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PostConstruct
-//    public void init() {
-//        Member member = new Member("Tany", MemberType.USER);
-//        Member saveMember = memberRepository.save(member);
-//
-//        for (int i = 0; i < 30; i++) {
-//            articleService.save(new ArticleCreateDto("title" + i, "content" + i), member);
-//        }
-//    }
+    @PostConstruct
+    public void createDummyMember() {
+        Member member = new Member("Dummy", MemberType.USER);
+        memberRepository.save(member);
+    }
 }
