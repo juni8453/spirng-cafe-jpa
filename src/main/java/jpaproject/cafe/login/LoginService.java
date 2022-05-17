@@ -1,9 +1,10 @@
-package jpaproject.cafe.login.dto;
+package jpaproject.cafe.login;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import jpaproject.cafe.login.dto.Token;
 import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.MemberType;
@@ -101,7 +102,5 @@ public class LoginService {
             .ifPresentOrElse(findMember -> findMember.setLogin(true),
                 () -> memberRepository.save(member));
 
-        // Todo: setLogin 대신 GitHubToken을 필드로 두고 덮어쓸까?
     }
-
 }
