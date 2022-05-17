@@ -68,8 +68,12 @@ public class Article {
 		return new Article(dto.getTitle(), dto.getContent());
 	}
 
-	public void updateArticle(ArticleUpdateDto articleUpdateDto) {
-		this.title = articleUpdateDto.getTitle();
-		this.content = articleUpdateDto.getContent();
+	public void update(ArticleUpdateDto articleUpdateDto) {
+		if (articleUpdateDto.getTitle() != null) {
+			this.title = articleUpdateDto.getTitle();
+		}
+		if (articleUpdateDto.getContent() != null) {
+			this.content = articleUpdateDto.getContent();
+		}
 	}
 }
