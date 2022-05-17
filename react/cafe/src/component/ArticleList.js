@@ -9,7 +9,7 @@ export default function ArticleList() {
 
     return (<>
         <ul className="list_day">
-            {CreateArticle}
+            <CreateArticle/>
         </ul>
         <table>
             <tbody>

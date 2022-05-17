@@ -97,6 +97,9 @@ table td:first-child {
   margin-left: 10px;
   color: #fff;
   background-color: firebrick;
+  font-size: 11px;
+  padding: 10px;
+
 }
 
 button {
