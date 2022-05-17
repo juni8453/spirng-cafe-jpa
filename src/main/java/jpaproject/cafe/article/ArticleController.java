@@ -7,6 +7,7 @@ import jpaproject.cafe.article.dto.ArticleUpdateDto;
 import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.MemberType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/articles")
 @RestController
+@Slf4j
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -47,18 +49,13 @@ public class ArticleController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // Todo : 이거를 삭제로 바꿀 예정
     @PatchMapping("/{id}")
     public ResponseEntity<ArticleUpdateDto> update(
         @PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
 
+        log.debug("id : {}, articleUpdateDto : {}", id, articleUpdateDto);
         articleService.update(id, articleUpdateDto);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        articleService.delete(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

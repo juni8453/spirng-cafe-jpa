@@ -44,7 +44,7 @@ public class ArticleService {
 		Article findArticle = articleRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
-		findArticle.updateArticle(articleUpdateDto);
+		findArticle.update(articleUpdateDto);
 	}
 
 	public void delete(Long id) {
