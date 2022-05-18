@@ -5,18 +5,17 @@ import '../component-css/CreateArticle.css';
 import '../component-css/ArticleTable.css';
 
 
-export default function ArticleList(props) {
-    const data = useFetch("http://localhost:8080/articles");
-
+export default function ArticleList() {
+    const data = useFetch("http://localhost:8080/articles?sort=id,desc");
     return (<>
 
-            <CreateArticle JSESSIONID={props.JSESSIONID} username={props.username}/>
+            <CreateArticle/>
 
         <div>
             <table class="type03">
                 <tr>
                     <td>{data.content && data.content.map(article => (
-                    <Article article={article} key={article.id} JSESSIONID={props.JSESSIONID} username={props.username}/>
+                    <Article article={article} key={article.id}/>
                         ))}
                     </td>
                 </tr>

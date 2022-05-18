@@ -3,7 +3,7 @@ import '../component-css/Header.css';
 
 export default function Header() {
 
-    return (
+return (
         <div className="nav">
             <div className="nav-left">
                 <h1><Link to={"/"}> JPA 게시판 </Link></h1>

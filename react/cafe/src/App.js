@@ -3,15 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from './component/Header';
 import ArticleList from './component/ArticleList';
 import './Layout.css';
-import Cookies from 'universal-cookie';
-
+import { getAllCookie} from './actions/Cookie';
 
 function App() {
-  const cookies = new Cookies();
-  const JSESSIONID= cookies.get("session")
-  const username= cookies.get("username")
-  console.log("세션:"+JSESSIONID )
-  console.log("유저이름:"+username )
+  console.log(getAllCookie());
 
   return (
     <div className="App">
@@ -21,8 +16,7 @@ function App() {
 
       <main className='div-main'>
         <Routes>
-          <Route path="/" element={<ArticleList JSESSIONID={JSESSIONID} username={username}/>} />
-          {/* <Route path="/warning" element={window.confirm("로그인이 필요합니다")} /> */}
+          <Route path="/" element={<ArticleList/>} />
         </Routes>
 </main>
       </BrowserRouter>
