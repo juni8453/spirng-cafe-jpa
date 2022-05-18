@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 // import useFetch from "../hook/useFetch";
 import { useRef } from "react";
+import '../component-css/CreateArticle.css';
 
 export default function CreateArticle() {
     // const days = useFetch("http://localhost:8080/articles");
@@ -28,15 +29,12 @@ export default function CreateArticle() {
     }
 
     return (<>
-        <ul>
-            여기에 로그인된 멤버이름!
-        </ul>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="form">
             <div className="input_area">
                 <input type="text" placeholder="글 입력" ref={contentRef} />
-                <button>
-                    저-장
-                </button>
+            </div>
+            <div>
+                <button>저-장</button>
             </div>
         </form>
     </>
