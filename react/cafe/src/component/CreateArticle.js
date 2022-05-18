@@ -19,11 +19,16 @@ export default function CreateArticle(props) {
                 content: contentRef.current.value
             }),
         }).then(res => {
+            console.log(res);
             if (res.ok) {
                 window.location.reload();
                 navigate("/");
-
+                // setIsLoading(false);
+            } else {
+                window.alert("로그인이 필요합니다");
+                window.location.reload();
             }
+
         });
     }
 

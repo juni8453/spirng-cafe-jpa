@@ -5,6 +5,7 @@ import ArticleList from './component/ArticleList';
 import './Layout.css';
 import Cookies from 'universal-cookie';
 
+
 function App() {
   const cookies = new Cookies();
   const JSESSIONID= cookies.get("session")
@@ -21,6 +22,7 @@ function App() {
       <main className='div-main'>
         <Routes>
           <Route path="/" element={<ArticleList JSESSIONID={JSESSIONID} username={username}/>} />
+          {/* <Route path="/warning" element={window.confirm("로그인이 필요합니다")} /> */}
         </Routes>
 </main>
       </BrowserRouter>
