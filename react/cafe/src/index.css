@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -6,14 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 20px;
-}
+} */
 
-ol,
+/* ol,
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
-}
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -25,44 +25,44 @@ a {
   color: #333;
 }
 
-.App {
+/* .App {
   width: 800px;
   margin: 0 auto;
-}
+} */
 
-.header {
+/* .header {
   position: relative;
   text-align: left;
   left: 0
-}
+} */
 
-.header .menu {
+/* .header .menu {
   position: absolute;
   top: 15px;
   right: 0;
-}
+} */
 
-.header .link {
+/* .header .link {
   border: 1px solid #333;
   padding: 10px;
   margin-left: 10px;
   background-color: #efefef;
   font-weight: bold;
   border-radius: 4px;
-}
+} */
 
-.list_day {
+/* .list_day {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
-.list_day li {
+/* .list_day li {
   flex: 20% 0 0;
   box-sizing: border-box;
   padding: 10px;
-}
+} */
 
-.list_day a {
+/* .list_day a {
   display: block;
   padding: 20px 0;
   font-weight: bold;
@@ -70,9 +70,9 @@ a {
   text-align: center;
   border-radius: 10px;
   background-color: dodgerblue;
-}
+} */
 
-table {
+/* table {
   border-collapse: collapse;
   width: 100%;
 }
@@ -86,12 +86,12 @@ table td {
 
 table td:first-child {
   width: 10%;
-}
+} */
 
-.off td {
+/* .off td {
   background: #eee;
   color: #ccc;
-}
+} */
 
 .btn_del {
   margin-left: 10px;
@@ -100,18 +100,6 @@ table td:first-child {
   font-size: 11px;
   padding: 10px;
 
-}
-
-button {
-  padding: 10px;
-  font-weight: bold;
-  font-size: 18px;
-  cursor: pointer;
-  border: 0 none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  color: #fff;
-  background-color: dodgerblue;
 }
 
 .input_area {

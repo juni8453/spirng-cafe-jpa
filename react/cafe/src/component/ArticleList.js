@@ -1,23 +1,26 @@
 import useFetch from "../hook/useFetch";
 import Article from "./Article";
 import CreateArticle from "./CreateArticle";
+import '../component-css/CreateArticle.css';
+import '../component-css/ArticleTable.css';
 
 export default function ArticleList() {
     const data = useFetch("http://localhost:8080/articles");
-    // const {day} = useParams();
-
-
+    
     return (<>
-        <ul className="list_day">
-            <CreateArticle/>
-        </ul>
-        <table>
-            <tbody>
-                {data.content && data.content.map(article => (
-                    <Article article={article} key={article.id}/>
-                ))}
-            </tbody>
-        </table>
+
+        <CreateArticle />
+        
+        <div>
+            <table class="type03">
+                <tr>
+                    <td>{data.content && data.content.map(article => (
+                        <Article article={article} key={article.id}/>
+                        ))}
+                    </td>
+                </tr>
+            </table>
+        </div>
     </>
     )
 }

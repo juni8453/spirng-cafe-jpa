@@ -1,7 +1,4 @@
-import { useState } from "react"
-
 export default function Article({ article }) {
-
 
     function del() {
         fetch(`http://localhost:8080/articles/${article.id}`, {

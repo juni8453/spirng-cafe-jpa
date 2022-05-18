@@ -1,0 +1,13 @@
+html, body {
+    height: 100%;
+    width: auto;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
