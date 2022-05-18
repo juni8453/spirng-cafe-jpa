@@ -54,4 +54,8 @@ public class Member {
 	public void setLogin(boolean login) {
 		this.login = login;
 	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 }

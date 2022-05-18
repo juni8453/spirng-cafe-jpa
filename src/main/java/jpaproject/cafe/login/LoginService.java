@@ -16,11 +16,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Service
+@Transactional
 public class LoginService {
 
     private final MemberRepository memberRepository;
@@ -109,7 +111,7 @@ public class LoginService {
 
         // 이미 존재할 경우 login 속성을 true로 업데이트, 존재하지 않으면 새로 저장
         memberRepository.findByMemberName(member.getMemberName())
-            .ifPresentOrElse(findMember -> findMember.setLogin(true),
+            .ifPresentOrElse(findMember -> findMember.setSessionId(sessionId),
                 () -> memberRepository.save(member));
 
     }

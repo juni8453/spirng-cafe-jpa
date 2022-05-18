@@ -1,5 +1,6 @@
 package jpaproject.cafe.article;
 
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
@@ -48,10 +49,13 @@ public class ArticleController {
 
 		String sessionId = authorization.split("=")[1];
 
-		Member member = memberRepository.findBySessionId(sessionId)
-			.orElseThrow(() -> new IllegalArgumentException("로그인이 필요해~~"));
+		Optional<Member> member = memberRepository.findBySessionId(sessionId);
 
-		articleService.save(articleCreateDto, member);
+		if(member.isEmpty()){
+			System.out.println("========= 멤버 없음~~~");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		articleService.save(articleCreateDto, member.get());
 
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
