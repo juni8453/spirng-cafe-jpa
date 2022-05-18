@@ -46,7 +46,7 @@ public class LoginController {
 
         // 응답 헤더 셋팅 (URI 예외 처리 필요)
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(new URI("http://localhost:8080/"));
+        headers.setLocation(new URI("http://localhost:3000/"));
         headers.set("Set-Cookie", cookie.toString());
 
         return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
