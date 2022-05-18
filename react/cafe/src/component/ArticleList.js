@@ -4,9 +4,7 @@ import CreateArticle from "./CreateArticle";
 
 export default function ArticleList() {
     const data = useFetch("http://localhost:8080/articles");
-    // const {day} = useParams();
-
-
+    
     return (<>
         <ul className="list_day">
             <CreateArticle/>

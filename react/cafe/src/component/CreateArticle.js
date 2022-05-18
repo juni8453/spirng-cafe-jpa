@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import useFetch from "../hook/useFetch";
+// import useFetch from "../hook/useFetch";
 import { useRef } from "react";
 
 export default function CreateArticle() {
-    const days = useFetch("http://localhost:8080/articles");
+    // const days = useFetch("http://localhost:8080/articles");
     const navigate = useNavigate();
     const contentRef = useRef(null);
 
@@ -23,7 +23,6 @@ export default function CreateArticle() {
             if (res.ok) {
                 window.location.reload();
                 navigate("/");  
-                // setIsLoading(false);
             }
         });
     }
@@ -37,7 +36,6 @@ export default function CreateArticle() {
                 <input type="text" placeholder="글 입력" ref={contentRef} />
                 <button>
                     저-장
-                    {/* {isLoading ? "Saving..." : "저장"} */}
                 </button>
             </div>
         </form>
