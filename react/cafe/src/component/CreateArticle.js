@@ -1,13 +1,10 @@
 import { useNavigate } from "react-router-dom";
-// import useFetch from "../hook/useFetch";
 import { useRef } from "react";
 import '../component-css/CreateArticle.css';
 
-export default function CreateArticle() {
-    // const days = useFetch("http://localhost:8080/articles");
+export default function CreateArticle(props) {
     const navigate = useNavigate();
     const contentRef = useRef(null);
-
     function onSubmit(e) {
         e.preventDefault();
 
@@ -15,6 +12,7 @@ export default function CreateArticle() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `JSESSIONID=${props.JSESSIONID}`,
             },
             body: JSON.stringify({
                 title: "React Post 테스트 중",
@@ -23,12 +21,16 @@ export default function CreateArticle() {
         }).then(res => {
             if (res.ok) {
                 window.location.reload();
-                navigate("/");  
+                navigate("/");
+
             }
         });
     }
 
     return (<>
+        <ul>
+            {props.username ? props.username : "로그인해주세요!"}
+        </ul>
         <form onSubmit={onSubmit} className="form">
             <div className="input_area">
                 <input type="text" placeholder="글 입력" ref={contentRef} />

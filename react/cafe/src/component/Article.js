@@ -11,7 +11,7 @@ export default function Article({ article }) {
             })
         }).then(res => {
             if (res.ok) {
-
+                window.location.reload();
             }
         }) 
     }

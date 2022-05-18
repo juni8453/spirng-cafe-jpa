@@ -1,7 +1,8 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../component-css/Header.css';
 
-export default function Header(){
+export default function Header() {
+
     return (
         <div className="nav">
             <div className="nav-left">
@@ -16,7 +17,7 @@ export default function Header(){
                     <a href="http://localhost:8080/">로그아웃</a>
                 </li>
             </ul>
-    
+
         </div>
     );
 }
