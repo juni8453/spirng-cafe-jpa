@@ -60,8 +60,8 @@ public class Article {
 		this.content = content;
 	}
 
-	public static Article dtoToEntity(ArticleCreateDto dto, Member dummyMember) {
-		return new Article(dto.getTitle(), dto.getContent(), dummyMember);
+	public static Article dtoToEntity(ArticleCreateDto dto, Member member) {
+		return new Article(dto.getTitle(), dto.getContent(), member);
 	}
 
 	public static Article dtoToEntity(ArticleCreateDto dto) {

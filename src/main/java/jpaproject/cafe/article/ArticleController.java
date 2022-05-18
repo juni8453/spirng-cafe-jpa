@@ -12,12 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,12 +42,19 @@ public class ArticleController {
         return ResponseEntity.ok(findArticles);
     }
 
-    @PostMapping
-    public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto) {
-        Member dummyMember = memberRepository.findAll().get(0);
-        articleService.save(articleCreateDto, dummyMember);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+	@PostMapping
+	public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto,
+		@RequestHeader("Authorization") String authorization) {
+
+		String sessionId = authorization.split("=")[1];
+
+		Member member = memberRepository.findBySessionId(sessionId)
+			.orElseThrow(() -> new IllegalArgumentException("로그인이 필요해~~"));
+
+		articleService.save(articleCreateDto, member);
+
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 
     // Todo : 이거를 삭제로 바꿀 예정
     @PatchMapping("/{id}")

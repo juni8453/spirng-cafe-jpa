@@ -19,13 +19,6 @@ public class Config implements WebMvcConfigurer {
 		return new RestTemplate();
 	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginCheckInterceptor())
-				.order(1)
-				.addPathPatterns("/**")
-				.excludePathPatterns("/login/**", "/articles");
-	}
 
 	@Override public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")

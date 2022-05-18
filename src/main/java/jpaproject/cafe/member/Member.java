@@ -25,6 +25,8 @@ public class Member {
 	@Column(columnDefinition = "boolean default true")
 	private boolean login;
 
+	private String sessionId;
+
 	// 테스트용..
 	public Member(String memberName, MemberType memberType) {
 		this.memberName = memberName;
@@ -34,6 +36,12 @@ public class Member {
 	public Member(OauthMemberInfo oauthMemberInfo, MemberType memberType) {
 		this.memberName = oauthMemberInfo.getLogin();
 		this.memberType = memberType;
+	}
+
+	public Member(OauthMemberInfo oauthMemberInfo, MemberType memberType, String sessionId) {
+		this.memberName = oauthMemberInfo.getLogin();
+		this.memberType = memberType;
+		this.sessionId = sessionId;
 	}
 
 	// default true로 설정해주어도 JPA는 그대로 null로 넣어버려서 이렇게 설정해주거나 그냥 초기화를 시켜줘야함
