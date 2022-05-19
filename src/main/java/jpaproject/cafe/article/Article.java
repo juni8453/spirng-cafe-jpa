@@ -76,4 +76,10 @@ public class Article {
 			this.content = articleUpdateDto.getContent();
 		}
 	}
+
+	public void validateMember(Member member) {
+		if(member != this.member){
+			throw new IllegalArgumentException("멤버가 일치하지 않습니다.");
+		}
+	}
 }

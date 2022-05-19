@@ -1,6 +1,5 @@
 package jpaproject.cafe.article;
 
-import java.util.Optional;
 import javax.annotation.PostConstruct;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
@@ -27,21 +26,23 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ArticleController {
 
-    private final ArticleService articleService;
-    private final MemberRepository memberRepository;
+	private final ArticleService articleService;
+	private final MemberRepository memberRepository;
+	private final ArticleRepository articleRepository;
 
-    public ArticleController(ArticleService articleService, MemberRepository memberRepository) {
-        this.articleService = articleService;
-        this.memberRepository = memberRepository;
-    }
+	public ArticleController(ArticleService articleService,
+		MemberRepository memberRepository, ArticleRepository articleRepository) {
+		this.articleService = articleService;
+		this.memberRepository = memberRepository;
+		this.articleRepository = articleRepository;
+	}
 
-
-    @GetMapping
-    public ResponseEntity<Slice<ArticleReadDto>> read(Pageable pageable) {
+	@GetMapping
+	public ResponseEntity<Slice<ArticleReadDto>> read(Pageable pageable) {
 		Slice<ArticleReadDto> findArticles = articleService.findAll(pageable);
 
-        return ResponseEntity.ok(findArticles);
-    }
+		return ResponseEntity.ok(findArticles);
+	}
 
 	@PostMapping
 	public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto,
@@ -49,31 +50,36 @@ public class ArticleController {
 
 		String sessionId = authorization.split("=")[1];
 
-		Optional<Member> member = memberRepository.findBySessionId(sessionId);
+		Member member = memberRepository.findBySessionId(sessionId)
+			.orElseThrow(() -> new IllegalArgumentException("멤버가 존재하지 않습니다."));
 
-		if(member.isEmpty()){
-			System.out.println("========= 멤버 없음~~~");
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		articleService.save(articleCreateDto, member.get());
+		articleService.save(articleCreateDto, member);
 
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-    // Todo : 이거를 삭제로 바꿀 예정
-    @PatchMapping("/{id}")
-    public ResponseEntity<ArticleUpdateDto> update(
-        @PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
+	// Todo : 이거를 삭제로 바꿀 예정
+	@PatchMapping("/{id}")
+	public ResponseEntity<ArticleUpdateDto> update(
+		@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto,
+		@RequestHeader("Authorization") String authorization) {
 
-        log.debug("id : {}, articleUpdateDto : {}", id, articleUpdateDto);
-        articleService.update(id, articleUpdateDto);
+		String sessionId = authorization.split("=")[1];
+		Member member = memberRepository.findBySessionId(sessionId)
+			.orElseThrow(() -> new IllegalArgumentException("멤버가 존재하지 않습니다."));
 
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+		Article article = articleRepository.findById(id)
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
-    @PostConstruct
-    public void createDummyMember() {
-        Member member = new Member("Dummy", MemberType.USER);
-        memberRepository.save(member);
-    }
+		article.validateMember(member);
+		articleService.update(id, articleUpdateDto);
+
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@PostConstruct
+	public void createDummyMember() {
+		Member member = new Member("Dummy", MemberType.USER);
+		memberRepository.save(member);
+	}
 }
