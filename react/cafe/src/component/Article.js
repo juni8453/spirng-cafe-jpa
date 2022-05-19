@@ -1,18 +1,22 @@
+import { getCookie } from "../actions/Cookie";
+
 export default function Article({ article }) {
 
     function del() {
         fetch(`http://localhost:8080/articles/${article.id}`, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `session=${getCookie("session")}`
             },
             body: JSON.stringify({
                 content: "삭제됨!"
             })
         }).then(res => {
-            if (res.ok) {
-                window.location.reload();
+            if (!res.ok) {
+                window.alert("본인의 게시글만 삭제할 수 있습니다");
             }
+            window.location.reload();
         }) 
     }
 
