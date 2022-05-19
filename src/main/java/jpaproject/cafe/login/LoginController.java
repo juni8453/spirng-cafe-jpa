@@ -2,8 +2,6 @@ package jpaproject.cafe.login;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import jpaproject.cafe.login.dto.Token;
@@ -21,29 +19,32 @@ import org.springframework.web.servlet.view.RedirectView;
 @RestController
 public class LoginController {
 
-    private final LoginService loginService;
+	private final LoginService loginService;
 
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
-    }
+	public LoginController(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
-    @GetMapping("/login")
-    public RedirectView oauthRedirect(RedirectAttributes attributes) {
-        return loginService.requestOauthId(attributes);
-    }
+	@GetMapping("/login")
+	public RedirectView oauthRedirect(RedirectAttributes attributes) {
+		return loginService.requestOauthId(attributes);
+	}
 
-    @GetMapping("/login/oauth")
-    public ResponseEntity<String> githubRedirect(HttpServletRequest request,
-                                                          @RequestParam String code,
-                                                          @RequestParam String state) throws URISyntaxException {
+	@GetMapping("/login/oauth")
+	public ResponseEntity<String> githubRedirect(HttpServletRequest request,
+		@RequestParam String code,
+		@RequestParam("state") String receivedState) {
 
-        Token accessTokenInfo = loginService.getAccessToken(code, state);
-        OauthMemberInfo memberInfo = loginService.getOauthMemberInfo(accessTokenInfo);
+		loginService.validateState(receivedState);
 
-        // Session 셋팅
-        HttpSession session = request.getSession();
+		Token accessTokenInfo = loginService.getAccessToken(code, receivedState);
+		OauthMemberInfo memberInfo = loginService.getOauthMemberInfo(accessTokenInfo);
+
+		// Session 셋팅
+		HttpSession session = request.getSession();
 
 		// sessionID를 냅다 UUID 처럼 써버리기~
+		// 만약 JWT 토큰을 사용하게되면 세션id 대신에 JWT 고유 토큰 id를 저장하면된다.
 		loginService.saveMember(memberInfo, session.getId());
 
 		ResponseCookie cookie1 = ResponseCookie.from("username", memberInfo.getLogin())
@@ -54,14 +55,15 @@ public class LoginController {
 			.path("/")
 			.build();
 
-		// 응답 헤더 셋팅 (URI 예외 처리 필요)
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(new URI("http://localhost:3000/"));
-		Map<String, String> cookies = new HashMap<>();
+		try {
+			headers.setLocation(new URI("http://localhost:3000/"));
+		} catch (URISyntaxException e) {
+			throw new IllegalArgumentException("잘못된 URI 입니다");
+		}
 		headers.add("Set-Cookie", cookie1.toString());
 		headers.add("Set-Cookie", cookie2.toString());
-		// 자꾸 쿠키 하나만 보내졌었는데 add 대신 set으로 해서 그런거였음
 
-        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
-    }
+		return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
+	}
 }

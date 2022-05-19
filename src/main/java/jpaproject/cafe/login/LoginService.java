@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import jpaproject.cafe.exception.AuthorizationException;
 import jpaproject.cafe.login.dto.Token;
 import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
@@ -114,5 +115,11 @@ public class LoginService {
             .ifPresentOrElse(findMember -> findMember.setSessionId(sessionId),
                 () -> memberRepository.save(member));
 
+    }
+
+    public void validateState(String receivedState) {
+            if (!receivedState.equals(this.state)) {
+                throw new AuthorizationException("CSRF 공격인가!");
+            }
     }
 }
