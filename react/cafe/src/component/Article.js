@@ -10,7 +10,7 @@ export default function Article({ article }) {
                 "Authorization": `session=${getCookie("session")}`
             },
             body: JSON.stringify({
-                content: "삭제됨!"
+                deleted: true
             })
         }).then(res => {
             if (!res.ok) {

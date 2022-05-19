@@ -3,7 +3,7 @@ package jpaproject.cafe.article;
 import javax.annotation.PostConstruct;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
-import jpaproject.cafe.article.dto.ArticleUpdateDto;
+import jpaproject.cafe.article.dto.ArticleDeleteDto;
 import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.MemberType;
@@ -60,8 +60,8 @@ public class ArticleController {
 
 	// Todo : 이거를 삭제로 바꿀 예정
 	@PatchMapping("/{id}")
-	public ResponseEntity<ArticleUpdateDto> update(
-		@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto,
+	public ResponseEntity<ArticleDeleteDto> delete(
+		@PathVariable Long id, @RequestBody ArticleDeleteDto articleDeleteDto,
 		@RequestHeader("Authorization") String authorization) {
 
 		String sessionId = authorization.split("=")[1];
@@ -72,7 +72,7 @@ public class ArticleController {
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
 		article.validateMember(member);
-		articleService.update(id, articleUpdateDto);
+		articleService.delete(id, articleDeleteDto);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

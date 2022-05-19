@@ -2,9 +2,8 @@ package jpaproject.cafe.article;
 
 import jpaproject.cafe.article.dto.ArticleCreateDto;
 import jpaproject.cafe.article.dto.ArticleReadDto;
-import jpaproject.cafe.article.dto.ArticleUpdateDto;
+import jpaproject.cafe.article.dto.ArticleDeleteDto;
 import jpaproject.cafe.member.Member;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
@@ -40,19 +39,10 @@ public class ArticleService {
 		return articleRepository.save(article).getId();
 	}
 
-	public void update(Long id, ArticleUpdateDto articleUpdateDto) {
-		// 예외 처리 필요
+	public void delete(Long id, ArticleDeleteDto articleDeleteDto) {
 		Article findArticle = articleRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
-		findArticle.update(articleUpdateDto);
-	}
-
-	public void delete(Long id) {
-		try {
-			articleRepository.deleteById(id);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("존재하지 않는 게시글입니다.");
-		}
+		findArticle.delete(articleDeleteDto);
 	}
 }

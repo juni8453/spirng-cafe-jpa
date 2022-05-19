@@ -15,7 +15,6 @@ export default function CreateArticle() {
                 "Authorization": `session=${getCookie("session")}`,
             },
             body: JSON.stringify({
-                title: "React Post 테스트 중",
                 content: contentRef.current.value
             }),
         }).then(res => {

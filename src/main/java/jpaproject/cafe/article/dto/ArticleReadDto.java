@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 public class ArticleReadDto {
 
     private final Long id;
-    private final String title;
     private final String content;
     private final LocalDateTime createdDateTime;
     private final LocalDateTime lastModifiedDateTime;
@@ -17,7 +16,6 @@ public class ArticleReadDto {
 
     public ArticleReadDto(Article article) {
         this.id = article.getId();
-        this.title = article.getTitle();
         this.content = article.getContent();
         this.createdDateTime = article.getCreatedDateTime();
         this.lastModifiedDateTime = article.getLastModifiedDateTime();

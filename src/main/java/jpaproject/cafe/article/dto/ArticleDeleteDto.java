@@ -7,8 +7,7 @@ import lombok.ToString;
 @Getter
 @RequiredArgsConstructor
 @ToString
-public class ArticleUpdateDto {
+public class ArticleDeleteDto {
 
-    private final String title;
-    private final String content;
+    private final boolean deleted;
 }

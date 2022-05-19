@@ -6,8 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class ArticleCreateDto {
-
-	private final String title;
+	
 	private final String content;
 
 }
