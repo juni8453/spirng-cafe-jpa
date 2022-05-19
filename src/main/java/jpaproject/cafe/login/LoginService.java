@@ -97,16 +97,6 @@ public class LoginService {
     }
 
 
-    public void saveMember(OauthMemberInfo memberInfo) {
-        Member member = new Member(memberInfo, MemberType.USER);
-
-        // 이미 존재할 경우 login 속성을 true로 업데이트, 존재하지 않으면 새로 저장
-        memberRepository.findByMemberName(member.getMemberName())
-            .ifPresentOrElse(findMember -> findMember.setLogin(true),
-                () -> memberRepository.save(member));
-
-    }
-
     public void saveMember(OauthMemberInfo memberInfo, String sessionId) {
         Member member = new Member(memberInfo, MemberType.USER, sessionId);
 

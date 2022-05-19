@@ -5,12 +5,15 @@ import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import jpaproject.cafe.login.dto.Token;
+import jpaproject.cafe.member.Member;
+import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.dto.OauthMemberInfo;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,10 +23,14 @@ import org.springframework.web.servlet.view.RedirectView;
 public class LoginController {
 
 	private final LoginService loginService;
+	private final MemberRepository memberRepository;
 
-	public LoginController(LoginService loginService) {
+	public LoginController(LoginService loginService,
+		MemberRepository memberRepository) {
 		this.loginService = loginService;
+		this.memberRepository = memberRepository;
 	}
+
 
 	@GetMapping("/login")
 	public RedirectView oauthRedirect(RedirectAttributes attributes) {
@@ -65,5 +72,17 @@ public class LoginController {
 		headers.add("Set-Cookie", cookie2.toString());
 
 		return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
+	}
+
+	@GetMapping("/logout")
+	public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorization) {
+
+		String sessionId = authorization.split("=")[1];
+		Member member = memberRepository.findBySessionId(sessionId)
+			.orElseThrow(() -> new IllegalArgumentException("멤버가 존재하지 않습니다."));
+
+		member.logout();
+
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
