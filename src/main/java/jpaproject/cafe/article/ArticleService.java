@@ -6,6 +6,7 @@ import jpaproject.cafe.article.dto.ArticleUpdateDto;
 import jpaproject.cafe.member.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,10 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	public Page<ArticleReadDto> findAll(Pageable pageable) {
+	public Slice<ArticleReadDto> findAll(Pageable pageable) {
 
-		Page<Article> articlePage = articleRepository.findAll(pageable);
-		Page<ArticleReadDto> pages = articlePage.map(article -> new ArticleReadDto(article));
+		Slice<Article> articlePage = articleRepository.findAll(pageable);
+		Slice<ArticleReadDto> pages = articlePage.map(article -> new ArticleReadDto(article));
 
 		return pages;
 	}

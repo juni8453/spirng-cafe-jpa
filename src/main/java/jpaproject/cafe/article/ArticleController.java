@@ -9,8 +9,8 @@ import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.MemberType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +37,8 @@ public class ArticleController {
 
 
     @GetMapping
-    public ResponseEntity<Page<ArticleReadDto>> read(Pageable pageable) {
-        Page<ArticleReadDto> findArticles = articleService.findAll(pageable);
+    public ResponseEntity<Slice<ArticleReadDto>> read(Pageable pageable) {
+		Slice<ArticleReadDto> findArticles = articleService.findAll(pageable);
 
         return ResponseEntity.ok(findArticles);
     }
