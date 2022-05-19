@@ -20,4 +20,15 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<RestResponse> AuthorizationExceptionMethod(AuthorizationException exception) {
+
+        String errorMessage = exception.getMessage();
+        log.error("errorMessage = {}", errorMessage);
+
+        RestResponse restResponse = RestResponse.of(errorMessage);
+
+        return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
+    }
 }

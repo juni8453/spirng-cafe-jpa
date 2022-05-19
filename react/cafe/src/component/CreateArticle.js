@@ -22,7 +22,6 @@ export default function CreateArticle() {
             if (!res.ok) {
                 window.alert("로그인이 필요합니다");
                 removeCookie("username");
-                removeCookie("JSESSION");
             }
             window.location.reload();
         });
