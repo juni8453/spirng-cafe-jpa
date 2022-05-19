@@ -1,11 +1,8 @@
-import { useNavigate } from "react-router-dom";
-// import useFetch from "../hook/useFetch";
 import { useRef } from "react";
 import '../component-css/CreateArticle.css';
+import { getCookie, removeCookie } from "../actions/Cookie";
 
 export default function CreateArticle() {
-    // const days = useFetch("http://localhost:8080/articles");
-    const navigate = useNavigate();
     const contentRef = useRef(null);
 
     function onSubmit(e) {
@@ -15,26 +12,32 @@ export default function CreateArticle() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `session=${getCookie("session")}`,
             },
             body: JSON.stringify({
                 title: "React Post 테스트 중",
                 content: contentRef.current.value
             }),
         }).then(res => {
-            if (res.ok) {
-                window.location.reload();
-                navigate("/");  
+            if (!res.ok) {
+                window.alert("로그인이 필요합니다");
+                removeCookie("username");
+                removeCookie("JSESSION");
             }
+            window.location.reload();
         });
     }
 
     return (<>
+        <ul>
+            {getCookie("username") ? getCookie("username") : "로그인 해주세요!"}
+        </ul>
         <form onSubmit={onSubmit} className="form">
             <div className="input_area">
                 <input type="text" placeholder="글 입력" ref={contentRef} />
-            </div>
-            <div>
-                <button>저-장</button>
+                <button>
+                    작성
+                </button>
             </div>
         </form>
     </>

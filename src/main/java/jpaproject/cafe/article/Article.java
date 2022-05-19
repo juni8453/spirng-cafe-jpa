@@ -60,8 +60,8 @@ public class Article {
 		this.content = content;
 	}
 
-	public static Article dtoToEntity(ArticleCreateDto dto, Member dummyMember) {
-		return new Article(dto.getTitle(), dto.getContent(), dummyMember);
+	public static Article dtoToEntity(ArticleCreateDto dto, Member member) {
+		return new Article(dto.getTitle(), dto.getContent(), member);
 	}
 
 	public static Article dtoToEntity(ArticleCreateDto dto) {
@@ -74,6 +74,12 @@ public class Article {
 		}
 		if (articleUpdateDto.getContent() != null) {
 			this.content = articleUpdateDto.getContent();
+		}
+	}
+
+	public void validateMember(Member member) {
+		if(member != this.member){
+			throw new IllegalArgumentException("멤버가 일치하지 않습니다.");
 		}
 	}
 }

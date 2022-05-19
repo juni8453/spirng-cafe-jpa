@@ -1,8 +1,9 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../component-css/Header.css';
 
-export default function Header(){
-    return (
+export default function Header() {
+
+return (
         <div className="nav">
             <div className="nav-left">
                 <h1><Link to={"/"}> JPA 게시판 </Link></h1>
@@ -16,7 +17,7 @@ export default function Header(){
                     <a href="http://localhost:8080/">로그아웃</a>
                 </li>
             </ul>
-    
+
         </div>
     );
 }
