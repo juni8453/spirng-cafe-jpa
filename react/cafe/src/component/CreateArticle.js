@@ -15,7 +15,7 @@ export default function CreateArticle() {
                 "Authorization": `session=${getCookie("session")}`,
             },
             body: JSON.stringify({
-                content: contentRef.current.value
+                content: contentRef.current.value,
             }),
         }).then(res => {
             if (!res.ok) {

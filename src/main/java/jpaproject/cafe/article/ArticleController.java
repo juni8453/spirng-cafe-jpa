@@ -48,6 +48,7 @@ public class ArticleController {
 	public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto,
 		@RequestHeader("Authorization") String authorization) {
 
+
 		String sessionId = authorization.split("=")[1];
 
 		Member member = memberRepository.findBySessionId(sessionId)

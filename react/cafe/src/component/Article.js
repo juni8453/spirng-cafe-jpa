@@ -17,15 +17,19 @@ export default function Article({ article }) {
                 window.alert("본인의 게시글만 삭제할 수 있습니다");
             }
             window.location.reload();
-        }) 
+        })
     }
 
     return (
-        <tr>
-            <td>{article.memberName}</td>
-            <td>{article.content}</td>
-            <td>{article.createdDateTime}</td>
-            <td><button className="btn_del" onClick={del}>삭제</button></td>
-        </tr>
+        <table>
+            <tbody>
+                <tr>
+                    <td>{article.memberName}</td>
+                    <td>{article.content}</td>
+                    <td>{article.createdDateTime}</td>
+                    <td><button className="btn_del" onClick={del}>삭제</button></td>
+                </tr>
+            </tbody>
+        </table>
     )
 }

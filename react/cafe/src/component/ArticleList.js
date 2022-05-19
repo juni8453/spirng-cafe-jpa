@@ -12,13 +12,15 @@ export default function ArticleList() {
             <CreateArticle/>
 
         <div>
-            <table class="type03">
+            <table className="type03">
+                <tbody>
                 <tr>
                     <td>{data.content && data.content.map(article => (
                     <Article article={article} key={article.id}/>
                         ))}
                     </td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </>
