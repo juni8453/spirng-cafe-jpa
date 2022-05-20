@@ -64,7 +64,7 @@ public class LoginController {
 
 		HttpHeaders headers = new HttpHeaders();
 		try {
-			headers.setLocation(new URI("http://localhost:3000/"));
+			headers.setLocation(new URI("http://3.36.169.168/"));
 		} catch (URISyntaxException e) {
 			throw new IllegalArgumentException("잘못된 URI 입니다");
 		}

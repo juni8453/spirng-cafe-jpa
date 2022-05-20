@@ -5,7 +5,7 @@ import { getCookie, removeCookie } from "../actions/Cookie";
 export default function Header() {
 
     function logout() {
-        fetch(`http://localhost:8080/logout`, {
+        fetch(`http://3.36.169.168:8080/logout`, {
             method: "GET",
             headers: {
                 "Authorization": `session=${getCookie("session")}`
@@ -27,7 +27,7 @@ export default function Header() {
 
             <ul className="nav-right">
                 <li className="nav-login-btn">
-                    <button><a href="http://localhost:8080/login">로그인</a></button>
+                    <button><a href="http://3.36.169.168:8080/login">로그인</a></button>
                 </li>
                 <li className="nav-logout-btn">
                 <button onClick={logout}><a>로그아웃</a></button>

@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jpaCafe
+    username: bc
+    password: 1qaS
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    jpaproject:
+      cafe: debug
+
+oauth2:
+  user:
+    github:
+      client-id: 1e759f80153ce0ad934a
+      client-secret: 12f8cdb73739d1bf128cbb059d861ddc43097330
+      redirect-uri: http://3.36.169.168:8080/login/oauth
+      login-uri: https://github.com/login/oauth/authorize
+      token-uri: https://github.com/login/oauth/access_token
+      user-uri: https://api.github.com/user
