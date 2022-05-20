@@ -8,7 +8,7 @@ export default function CreateArticle() {
     function onSubmit(e) {
         e.preventDefault();
 
-        fetch(`http://localhost:8080/articles`, {
+        fetch(`http://3.36.169.168:8080/articles`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -11,10 +11,10 @@ return (
 
             <ul className="nav-right">
                 <li className="nav-login-btn">
-                    <a href="http://localhost:8080/login">로그인</a>
+                    <a href="http://3.36.169.168:8080/login">로그인</a>
                 </li>
                 <li className="nav-logout-btn">
-                    <a href="http://localhost:8080/">로그아웃</a>
+                    <a href="http://3.36.169.168:8080/">로그아웃</a>
                 </li>
             </ul>
 

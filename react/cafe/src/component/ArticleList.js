@@ -6,7 +6,7 @@ import '../component-css/ArticleTable.css';
 
 
 export default function ArticleList() {
-    const data = useFetch("http://localhost:8080/articles?sort=id,desc");
+    const data = useFetch("http://3.36.169.168:8080/articles?sort=id,desc");
     return (<>
 
             <CreateArticle/>
