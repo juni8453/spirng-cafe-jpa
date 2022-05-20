@@ -1,8 +1,10 @@
+배포url : http://3.36.169.168/
+---
 ### `CodeSquad 3번쩨 프로젝트` ⚒
 #### 
 - `기간` : 2022.05.09 ~ 2022.05.20
 - `팀 멤버` : BC, Tany (BE / 2)
-- `기술 스택` : Spring Boot, MySQL, Spring Data JPA, Boot Strap, Git, AWS EC2, Docker
+- `기술 스택` : Spring Boot, MySQL, Spring Data JPA, Boot Strap, Git, AWS EC2, Docker, React
 ---
 
 #### `Git Flow`
