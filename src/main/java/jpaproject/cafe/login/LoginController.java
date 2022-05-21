@@ -82,6 +82,7 @@ public class LoginController {
 			.orElseThrow(() -> new IllegalArgumentException("멤버가 존재하지 않습니다."));
 
 		member.logout();
+		memberRepository.save(member);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
