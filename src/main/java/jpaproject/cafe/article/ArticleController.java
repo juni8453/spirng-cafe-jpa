@@ -2,8 +2,8 @@ package jpaproject.cafe.article;
 
 import javax.annotation.PostConstruct;
 import jpaproject.cafe.article.dto.ArticleCreateDto;
-import jpaproject.cafe.article.dto.ArticleReadDto;
 import jpaproject.cafe.article.dto.ArticleDeleteDto;
+import jpaproject.cafe.article.dto.ArticleReadDto;
 import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.MemberType;
@@ -40,15 +40,14 @@ public class ArticleController {
 	@GetMapping
 	public ResponseEntity<Slice<ArticleReadDto>> read(Pageable pageable) {
 		Slice<ArticleReadDto> findArticles = articleService.findAll(pageable);
-
+		System.out.println("==================================");
 		return ResponseEntity.ok(findArticles);
 	}
 
 	@PostMapping
 	public ResponseEntity<ArticleCreateDto> create(@RequestBody ArticleCreateDto articleCreateDto,
 		@RequestHeader("Authorization") String authorization) {
-
-
+		System.out.println("articleCreateDto = " + articleCreateDto.getContent());
 		String sessionId = authorization.split("=")[1];
 
 		Member member = memberRepository.findBySessionId(sessionId)

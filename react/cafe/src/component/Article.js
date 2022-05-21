@@ -3,7 +3,7 @@ import { getCookie } from "../actions/Cookie";
 export default function Article({ article }) {
 
     function del() {
-        fetch(`http://3.36.169.168:8080/articles/${article.id}`, {
+        fetch(`http://${process.env.REACT_APP_ROOT_URL}:8080/articles/${article.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

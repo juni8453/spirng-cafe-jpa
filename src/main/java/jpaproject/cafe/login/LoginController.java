@@ -8,6 +8,7 @@ import jpaproject.cafe.login.dto.Token;
 import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.dto.OauthMemberInfo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -24,11 +25,14 @@ public class LoginController {
 
 	private final LoginService loginService;
 	private final MemberRepository memberRepository;
+private final String homeUri;
 
 	public LoginController(LoginService loginService,
-		MemberRepository memberRepository) {
+		MemberRepository memberRepository,
+		@Value("${oauth2.user.github.home-uri}") String homeUri) {
 		this.loginService = loginService;
 		this.memberRepository = memberRepository;
+		this.homeUri = homeUri;
 	}
 
 
@@ -64,7 +68,7 @@ public class LoginController {
 
 		HttpHeaders headers = new HttpHeaders();
 		try {
-			headers.setLocation(new URI("http://3.36.169.168/"));
+			headers.setLocation(new URI(homeUri));
 		} catch (URISyntaxException e) {
 			throw new IllegalArgumentException("잘못된 URI 입니다");
 		}
