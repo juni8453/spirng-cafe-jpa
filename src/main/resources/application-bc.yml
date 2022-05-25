@@ -22,9 +22,10 @@ oauth2:
   user:
     github:
       client-id: 0684814fcec8b783587f
-      client-secret: 9cb33ffab3d47bbf626ce2b8797fc880213ddf9b
+      client-secret: ${secret.user.github.client-secret}
       redirect-uri: http://localhost:8080/login/oauth
       login-uri: https://github.com/login/oauth/authorize
       token-uri: https://github.com/login/oauth/access_token
       user-uri: https://api.github.com/user
       home-uri: http://localhost:3000/
+      testing: ${secret.user.github.test}

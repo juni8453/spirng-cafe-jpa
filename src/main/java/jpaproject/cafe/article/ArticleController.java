@@ -8,6 +8,7 @@ import jpaproject.cafe.member.Member;
 import jpaproject.cafe.member.MemberRepository;
 import jpaproject.cafe.member.MemberType;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
@@ -29,18 +30,21 @@ public class ArticleController {
 	private final ArticleService articleService;
 	private final MemberRepository memberRepository;
 	private final ArticleRepository articleRepository;
+	private String test;
 
 	public ArticleController(ArticleService articleService,
-		MemberRepository memberRepository, ArticleRepository articleRepository) {
+		MemberRepository memberRepository, ArticleRepository articleRepository,
+		@Value("${oauth2.user.github.testing}") String test) {
 		this.articleService = articleService;
 		this.memberRepository = memberRepository;
 		this.articleRepository = articleRepository;
+		this. test = test;
 	}
 
 	@GetMapping
 	public ResponseEntity<Slice<ArticleReadDto>> read(Pageable pageable) {
 		Slice<ArticleReadDto> findArticles = articleService.findAll(pageable);
-		System.out.println("==================================");
+		System.out.printf("=============%s=====================", test);
 		return ResponseEntity.ok(findArticles);
 	}
 
